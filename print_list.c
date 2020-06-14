@@ -10,9 +10,6 @@ void print_list(const listint_t *list)
 {
     int i;
 
-    while(list->prev != NULL)
-        list = list->prev;
-
     i = 0;
     while (list)
     {
