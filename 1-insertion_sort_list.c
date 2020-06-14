@@ -10,7 +10,7 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-
+	listint_t *root;
 	/* I do this to make sure that list exists to begin with */
 	if (!list)
 		exit(1);
@@ -19,6 +19,8 @@ void insertion_sort_list(listint_t **list)
 	while ((*list)->prev != NULL)
 		(*list) = (*list)->prev;
 
+	root = (*list);
+
 	while ((*list)->next != NULL)
 	{
 		*list = (*list)->next;
@@ -26,10 +28,24 @@ void insertion_sort_list(listint_t **list)
 		{
 			/* Swap the nodes if the right node is less than the left */
 			swap_nodes((*list)->prev, (*list));
+
+			/**
+			 * Roots node gets changed with swap every now and then
+			 * so we have to re-iterate back to root b4 we print to
+			 * make sure the entire list gets printed (because they gave
+			 * us a dumb print function that doesnt navigate to root on
+			 * its own.)
+			 */
+			while (root->prev != NULL)
+				root = root->prev;
+			print_list(root);
 			/* Remember to print every swap :) */
-			print_list(*list);
 		}
 	}
+
+	/* Navigate the list back to root in case they try to print it */
+	while ((*list)->prev != NULL)
+		(*list) = (*list)->prev;
 }
 
 /**
