@@ -13,6 +13,9 @@ void cocktail_sort_list(listint_t **list)
 	int is_sorted = 0;
 	listint_t *root;
 
+	/* I do this to make sure that list exists to begin with */
+	if (!list)
+		exit(1);
 	root = (*list);
 
 	while (is_sorted == 0)
@@ -30,11 +33,8 @@ void cocktail_sort_list(listint_t **list)
 				print_list(root);
 				is_sorted = 0;
 			}
-
-
 			(*list) = (*list)->next;
 		}
-
 		/* descend the list */
 		while ((*list)->prev != NULL)
 		{
